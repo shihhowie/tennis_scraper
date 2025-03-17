@@ -13,6 +13,18 @@
   }
 }
 
+.half-width-event {
+  width: 50% !important; /* Set the width of overlapping events to half */
+  position: absolute !important; /* Prevent FullCalendar from adjusting layout */
+  left: 0 !important; /* Align the first overlapping event to the left */
+}
+
+/* Adjust the second overlapping event to appear side by side */
+.half-width-event + .half-width-event {
+  left: 50% !important; /* Position the second event to the right */
+}
+
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
