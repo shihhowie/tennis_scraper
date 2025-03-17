@@ -39,7 +39,7 @@ const App = () => {
       const otherStart = new Date(e.start).getTime();
       return (
         e.title !== arg.event.title && // Exclude the current event
-        eventStart == otherStart
+        eventStart === otherStart
       );
     });
   
