@@ -15,6 +15,7 @@ const App = () => {
         start: `${item.date}T${String(item.start).padStart(2, '0')}:00:00`,
         end: `${item.date}T${String(item.end).padStart(2, '0')}:00:00`,
         backgroundColor: item.slots>0 ? "green" : "red",
+        url: item.url
         // className: 'half-width-event' // Add custom class to events
       }));
       setEvents(formattedEvents);
@@ -48,6 +49,13 @@ const App = () => {
     return isOverlapping ? ['half-width-event'] : [];
   };
 
+  const handleEventClick = (clickInfo) => {
+    // Open the booking link in a new tab
+    if (clickInfo.event.extendedProps.url) {
+      window.open(clickInfo.event.extendedProps.url, '_blank');
+    }
+  };
+
   return (
     <div>
       <h1>Tennis Court Availability</h1>
@@ -66,6 +74,7 @@ const App = () => {
         eventDisplay="block" // Ensure events are displayed as blocks
         eventContent={renderEventContent}
         eventClassNames={handleEventClassNames}
+        eventClick={handleEventClick}
         eventOverlap={false}
       />
     </div>

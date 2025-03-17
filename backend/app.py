@@ -1,5 +1,6 @@
 import psycopg2
 from flask import Flask, jsonify
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -47,7 +48,7 @@ def get_availability():
         # Print the results
         results = []
         for row in rows:
-            date_str = row[2].strftime("%Y-%m-%d")
+            date_str = datetime.strptime(str(row[2]), "%Y%m%d").strftime("%Y-%m-%d")
             url = f"{url_lookup.get(row[0])}/{date_str}"
             pack_line = {"court": row[0], "date": row[2], "start": row[3], "end": row[4], "slots": row[5], "url": url}
             results.append(pack_line)
