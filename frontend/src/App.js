@@ -34,11 +34,9 @@ const App = () => {
   const handleEventClassNames = (arg) => {
     // Detect overlapping events manually
     const eventStart = new Date(arg.event.start).getTime();
-    const eventEnd = new Date(arg.event.end).getTime();
   
     const isOverlapping = events.some((e) => {
       const otherStart = new Date(e.start).getTime();
-      const otherEnd = new Date(e.end).getTime();
       return (
         e.title !== arg.event.title && // Exclude the current event
         eventStart == otherStart
