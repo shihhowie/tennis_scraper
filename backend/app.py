@@ -12,8 +12,8 @@ DB_HOST="database-1.c12cmowoyxgf.eu-north-1.rds.amazonaws.com"
 DB_PORT="5432"
 
 url_lookup = {
-    "rosemary_garden_tennis": "https://bookings.better.org.uk/location/islington-tennis-centre/rosemary-gardens-tennis/",
-    "islington_tennis_centre": "https://bookings.better.org.uk/location/islington-tennis-centre/tennis-court-indoor/"
+    "rosemary_garden_tennis": "https://bookings.better.org.uk/location/islington-tennis-centre/rosemary-gardens-tennis",
+    "islington_tennis_centre": "https://bookings.better.org.uk/location/islington-tennis-centre/tennis-court-indoor"
 }
 
 @app.route("/", methods=["GET"])
