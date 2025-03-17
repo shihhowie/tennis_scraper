@@ -7,7 +7,7 @@ const App = () => {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    axios.get("16.16.66.189:5000/api/availability").then(response => {
+    axios.get("http://172.31.24.168:5000/api/availability").then(response => {
       const formattedEvents = response.data.map(item => ({
         title: item.slots>0 ? "Available" : "Fully Booked",
         start: `${item.date}T${String(item.start).padStart(2, '0')}:00:00`,
