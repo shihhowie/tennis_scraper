@@ -12,7 +12,8 @@ DB_NAME="testdb"
 DB_USER="howardshih"
 DB_PASSWORD="howardshih"
 
-DB_HOST="database-1.c12cmowoyxgf.eu-north-1.rds.amazonaws.com"
+# DB_HOST="database-1.c12cmowoyxgf.eu-north-1.rds.amazonaws.com"
+DB_HOST="hshih-db-eu1.proxy-c12cmowoyxgf.eu-north-1.rds.amazonaws.com"
 DB_PORT="5432"
 
 url_lookup = {
