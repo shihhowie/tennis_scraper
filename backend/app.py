@@ -69,6 +69,13 @@ def get_availability():
 
 # Lambda handler
 def lambda_handler(event, context):
+    print("Received event:", event)
+
+    # Extract the HTTP method and path for HTTP API (Version 2)
+    if "httpMethod" not in event and "requestContext" in event:
+        event["httpMethod"] = event["requestContext"]["http"]["method"]
+        event["path"] = event["rawPath"]
+        
     return app.resolve(event, context)
 
 # if __name__ == '__main__':
