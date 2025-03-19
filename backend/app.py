@@ -19,11 +19,11 @@ url_lookup = {
     "islington_tennis_centre": "https://bookings.better.org.uk/location/islington-tennis-centre/tennis-court-indoor"
 }
 
-@app.route("/", methods=["GET"])
+@app.get("/")
 def home():
     return jsonify({"message": "Tennis Court API is running"}), 200
 
-@app.route('/api/availability', methods=['GET'])
+@app.get('/api/availability')
 def get_availability():
     try:
     # Connect to the PostgreSQL database
