@@ -1,12 +1,10 @@
 import psycopg2
-from flask_cors import CORS
 from flask import Flask, jsonify
 from datetime import datetime
 from aws_lambda_powertools.event_handler.api_gateway import ApiGatewayResolver
 
 app = Flask(__name__)
 lambda_handler = ApiGatewayResolver()
-CORS(app)
 
 DB_NAME="testdb"
 DB_USER="howardshih"
@@ -72,4 +70,5 @@ def get_availability():
 
 if __name__ == '__main__':
     # get_availability()
-    app.run(host='0.0.0.0', port=5000)
+    # app.run(host='0.0.0.0', port=5000)
+    app.resolve(event, context)
