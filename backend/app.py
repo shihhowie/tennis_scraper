@@ -67,8 +67,11 @@ def get_availability():
     except Exception as e:
         print("Error:", e)
 
-
-if __name__ == '__main__':
-    # get_availability()
-    # app.run(host='0.0.0.0', port=5000)
-    app.resolve(event, context)
+# Lambda handler
+def lambda_handler(event, context):
+    return app.resolve(event, context)
+    
+# if __name__ == '__main__':
+#     # get_availability()
+#     # app.run(host='0.0.0.0', port=5000)
+#     app.resolve(event, context)
