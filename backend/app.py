@@ -23,6 +23,11 @@ url_lookup = {
 def home():
     return {"message": "Tennis Court API is running"}
 
+
+@app.get("/tennis-schedule")
+def home():
+    return {"message": "Tennis Court API is running on tennis-schedule"}
+
 @app.get('/api/availability')
 def get_availability():
     try:
@@ -75,7 +80,7 @@ def lambda_handler(event, context):
     if "httpMethod" not in event and "requestContext" in event:
         event["httpMethod"] = event["requestContext"]["http"]["method"]
         event["path"] = event["rawPath"]
-        
+
     return app.resolve(event, context)
 
 # if __name__ == '__main__':
