@@ -69,8 +69,8 @@ def get_availability():
 
 # Lambda handler
 def lambda_handler(event, context):
-    return app.resolve(event, context)
-    
+    return lambda_handler.resolve(event, context)
+
 # if __name__ == '__main__':
 #     # get_availability()
 #     # app.run(host='0.0.0.0', port=5000)
