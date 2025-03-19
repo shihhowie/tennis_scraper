@@ -3,8 +3,8 @@ from flask import Flask, jsonify
 from datetime import datetime
 from aws_lambda_powertools.event_handler.api_gateway import ApiGatewayResolver
 
-app = Flask(__name__)
-lambda_handler = ApiGatewayResolver()
+# app = Flask(__name__)
+app = ApiGatewayResolver()
 
 DB_NAME="testdb"
 DB_USER="howardshih"
@@ -69,7 +69,7 @@ def get_availability():
 
 # Lambda handler
 def lambda_handler(event, context):
-    return lambda_handler.resolve(event, context)
+    return app.resolve(event, context)
 
 # if __name__ == '__main__':
 #     # get_availability()
