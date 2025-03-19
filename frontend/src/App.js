@@ -10,6 +10,7 @@ const App = () => {
 
   useEffect(() => {
     axios.get("/api/availability").then(response => {
+	console.log(response.data);
       const formattedEvents = response.data.map(item => ({
         title: item.court.split("_").join(" "),
         start: `${item.date}T${String(item.start).padStart(2, '0')}:00:00`,

@@ -1,8 +1,10 @@
 import psycopg2
+from flask_cors import CORS
 from flask import Flask, jsonify
 from datetime import datetime
 
 app = Flask(__name__)
+CORS(app)
 
 DB_NAME="testdb"
 DB_USER="howardshih"
