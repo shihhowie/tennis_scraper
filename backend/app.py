@@ -21,7 +21,7 @@ url_lookup = {
 
 @app.get("/")
 def home():
-    return jsonify({"message": "Tennis Court API is running"}), 200
+    return {"message": "Tennis Court API is running"}
 
 @app.get('/api/availability')
 def get_availability():
@@ -62,7 +62,7 @@ def get_availability():
         print("Connection closed.")
         # print(results)
         print("jsonify res", jsonify(results))
-        return jsonify(results)
+        return results
 
     except Exception as e:
         print("Error:", e)
