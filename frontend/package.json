@@ -2,7 +2,7 @@
   "name": "tennis-calendar",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://16.16.66.189:5000",
+  "proxy": "https://4vi4moejhi.execute-api.eu-north-1.amazonaws.com/api/availability",
   "dependencies": {
     "@fullcalendar/daygrid": "^6.1.15",
     "@fullcalendar/react": "^6.1.15",
