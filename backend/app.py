@@ -10,8 +10,8 @@ DB_NAME="testdb"
 DB_USER="howardshih"
 DB_PASSWORD="howardshih"
 
-# DB_HOST="database-1.c12cmowoyxgf.eu-north-1.rds.amazonaws.com"
-DB_HOST="hshih-db-eu1.proxy-c12cmowoyxgf.eu-north-1.rds.amazonaws.com"
+DB_HOST="database-1.c12cmowoyxgf.eu-north-1.rds.amazonaws.com"
+# DB_HOST="hshih-db-eu1.proxy-c12cmowoyxgf.eu-north-1.rds.amazonaws.com"
 DB_PORT="5432"
 
 url_lookup = {
@@ -25,12 +25,13 @@ def home():
 
 
 @app.get("/tennis-schedule")
-def home():
+def tennis_schedule():
     return {"message": "Tennis Court API is running on tennis-schedule"}
 
 @app.get('/api/availability')
 def get_availability():
     try:
+        print("Connecting to the database...")
     # Connect to the PostgreSQL database
         conn = psycopg2.connect(
             dbname=DB_NAME,
@@ -66,7 +67,7 @@ def get_availability():
         conn.close()
         print("Connection closed.")
         # print(results)
-        print("jsonify res", jsonify(results))
+        # print("jsonify res", jsonify(results))
         return results
 
     except Exception as e:
