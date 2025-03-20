@@ -9,7 +9,8 @@ const App = () => {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    axios.get("/api/availability").then(response => {
+    const API_BASE_URL = ProcessingInstruction.env.REACT_APP_API_BASE_URL;
+    axios.get("${API_BASE_URL}/api/availability").then(response => {
 	console.log(response.data);
       const formattedEvents = response.data.map(item => ({
         title: item.court.split("_").join(" "),
