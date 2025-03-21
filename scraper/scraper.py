@@ -25,7 +25,7 @@ chrome_options.add_argument("--disable-dev-shm-usage")  # Required for Lambda
 chrome_options.add_argument("--disable-gpu")  # Disable GPU for headless mode
 chrome_options.add_argument("--window-size=1920x1080")  # Set window size
 # Specify the path to the ChromeDriver
-chromedriver_autoinstaller.install()
+# chromedriver_autoinstaller.install()
 
 # service = Service('/home/ec2-user/downloads')  # Update with your actual path
 if chrome_aws_lambda:
