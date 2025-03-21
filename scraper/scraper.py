@@ -17,14 +17,15 @@ chrome_options.add_argument("--no-sandbox")  # Required for EC2
 chrome_options.add_argument("--disable-dev-shm-usage")  # Required for EC2
 chrome_options.add_argument("--disable-gpu")  # Disable GPU for headless mode
 chrome_options.add_argument("--window-size=1920x1080")  # Set window size
-
+chrome_options.binary_location='/opt/chrome/chrome-linux64/chrome'
 CHROMEDRIVER_PATH = "/opt/bin/chromedriver"  # Update this path if needed
 
 # driver_path=chromedriver_autoinstaller.install()  # Automatically downloads and installs the matching Chromedriver
 # Initialize the WebDriver
 def query_tennis_court(court_name, base_url):
     # driver_path = chrome_aws_lambda.chromedriver_path if chrome_aws_lambda else None
-    service = Service(CHROMEDRIVER_PATH) 
+    service = Service(executable_path="/opt/chrome-driver/chromedriver-linux64/chromedriver",
+                      servicelog_path="/tmp/chromedriver.log") 
     driver = webdriver.Chrome(service=service, options=chrome_options)
 
     today = datetime.now().date()
