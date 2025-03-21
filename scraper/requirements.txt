@@ -1,4 +1,2 @@
 psycopg2-binary
 selenium==4.29.0
-chromedriver-autoinstaller
-chrome-aws-lambda
