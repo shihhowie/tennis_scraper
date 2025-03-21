@@ -1,4 +1,6 @@
- FROM amazon/aws-lambda-python:3.9
+FROM amazon/aws-lambda-python:3.9
+
+RUN sudo yum install -y unzip
 
 COPY ./chrome-installer.sh ./chrome-installer.sh
 RUN chmod +x ./chrome-installer.sh
