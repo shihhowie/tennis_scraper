@@ -7,35 +7,16 @@ from selenium.webdriver.support import expected_conditions as EC
 from datetime import datetime,timedelta
 import sys
 import time
-import chromedriver_autoinstaller
 
 from sql_util import write_to_db
-
-try:
-    import chrome_aws_lambda
-except ImportError:
-    chrome_aws_lambda = None
-
-# Set up Chrome options
-chrome_options = Options()
-chrome_options.add_argument("--headless")  # Run in headless mode for efficiency
-chrome_options.add_argument("--headless")  # Run in headless mode
-chrome_options.add_argument("--no-sandbox")  # Required for Lambda
-chrome_options.add_argument("--disable-dev-shm-usage")  # Required for Lambda
-chrome_options.add_argument("--disable-gpu")  # Disable GPU for headless mode
-chrome_options.add_argument("--window-size=1920x1080")  # Set window size
-# Specify the path to the ChromeDriver
-# chromedriver_autoinstaller.install()
-
-# service = Service('/home/ec2-user/downloads')  # Update with your actual path
-if chrome_aws_lambda:
-    chrome_options.binary_location = chrome_aws_lambda.executable_path
-
+import chromedriver_autoinstaller
+driver_path =chromedriver_autoinstaller.install()  # Automatically downloads and installs the matching Chromedriver
 # Initialize the WebDriver
 def query_tennis_court(court_name, base_url):
-    driver_path = chrome_aws_lambda.chromedriver_path if chrome_aws_lambda else None
+    # driver_path = chrome_aws_lambda.chromedriver_path if chrome_aws_lambda else None
+    service = Service(driver_path) 
+    driver = webdriver.Chrome(service=service, options=chrome_options)
 
-    driver = webdriver.Chrome(executable_path=driver_path, options=chrome_options)
     today = datetime.now().date()
     write_time = int(time.time())
     for i in range(7):
