@@ -10,6 +10,14 @@ import time
 
 from sql_util import write_to_db
 import chromedriver_autoinstaller
+
+chrome_options = Options()
+chrome_options.add_argument("--headless")  # Run in headless mode
+chrome_options.add_argument("--no-sandbox")  # Required for EC2
+chrome_options.add_argument("--disable-dev-shm-usage")  # Required for EC2
+chrome_options.add_argument("--disable-gpu")  # Disable GPU for headless mode
+chrome_options.add_argument("--window-size=1920x1080")  # Set window size
+
 driver_path =chromedriver_autoinstaller.install()  # Automatically downloads and installs the matching Chromedriver
 # Initialize the WebDriver
 def query_tennis_court(court_name, base_url):
