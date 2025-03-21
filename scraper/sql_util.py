@@ -7,38 +7,6 @@ DB_PASSWORD="howardshih"
 DB_HOST="database-1.c12cmowoyxgf.eu-north-1.rds.amazonaws.com"
 DB_PORT="5432"
 
-def connect_to_db():
-    try:
-    # Connect to the PostgreSQL database
-        conn = psycopg2.connect(
-            dbname=DB_NAME,
-            user=DB_USER,
-            password=DB_PASSWORD,
-            host=DB_HOST,
-            port=DB_PORT
-        )
-        print("Connected to the database successfully!")
-
-        # Create a cursor object
-        cur = conn.cursor()
-
-        # Execute a SQL query to fetch table data
-        cur.execute("SELECT * FROM tennis_court_schedule LIMIT 5;")
-        rows = cur.fetchall()
-
-        # Print the results
-        for row in rows:
-            print(row)
-
-        # Close connection
-        cur.close()
-        conn.close()
-        print("Connection closed.")
-
-    except Exception as e:
-        print("Error:", e)
-
-
 def write_to_db(sql):
     try:
         # SQL = """
@@ -47,4 +15,22 @@ def write_to_db(sql):
         # """
         conn = psycopg2.connect(
             dbname=DB_NAME,
-                                                                                                                                               25,10         50%
+            user=DB_USER,
+            password=DB_PASSWORD,
+            host=DB_HOST,
+            port=DB_PORT
+        )
+
+        cur = conn.cursor()
+        cur.execute(sql)
+        conn.commit()
+        # print("commited SQL: ", sql)
+        cur.close()
+        conn.close()
+    except Exception as e:
+        print("ERROR:", e)
+
+
+if __name__ == '__main__':
+    connect_to_db()
+    write_to_db()

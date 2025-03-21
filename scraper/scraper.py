@@ -29,7 +29,6 @@ def query_tennis_court(court_name, base_url):
     driver = webdriver.Chrome(options=chrome_options)
     today = datetime.now().date()
     write_time = int(time.time())
-                                                                                                                                  1,5           Top
     for i in range(7):
         date = today+timedelta(days=i)
         datestring = date.strftime('%Y-%m-%d')
@@ -75,8 +74,8 @@ def query_tennis_court(court_name, base_url):
                         VALUES('{court_name}', {write_time}, {datestring_db}, {start_time}, {end_time}, {num_slots});
                     """
                     write_to_db(sql)
-            except Exception as e:
-                print(f'An error occurred: {e}')
+        except Exception as e:
+            print(f'An error occurred: {e}')
         time.sleep(1)
 
     driver.quit()
@@ -89,4 +88,3 @@ def lambda_handler(event, context):
 if __name__ == '__main__':
     query_tennis_court("islington_tennis_centre", "https://bookings.better.org.uk/location/islington-tennis-centre/tennis-court-indoor")
     query_tennis_court("rosemary_garden_tennis", "https://bookings.better.org.uk/location/islington-tennis-centre/rosemary-gardens-tennis")
-                                                                                                                                               81,5          Bot
