@@ -9,7 +9,6 @@ import sys
 import time
 
 from sql_util import write_to_db
-import chromedriver_autoinstaller
 
 chrome_options = Options()
 chrome_options.add_argument("--headless")  # Run in headless mode
