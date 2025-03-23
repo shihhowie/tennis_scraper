@@ -81,6 +81,11 @@ def query_tennis_court(court_name, base_url):
     driver.quit()
 
 def lambda_handler(event, context):
+    print("Environment variables:")
+    print(os.environ)
+    print("Checking paths in Lambda environment...")
+    print(f"Chromedriver exists: {os.path.exists('/var/task/chromedriver-linux64/chromedriver')}")
+    print(f"Chromium exists: {os.path.exists('/var/task/chrome-linux64/chrome')}")
     query_tennis_court("islington_tennis_centre", "https://bookings.better.org.uk/location/islington-tennis-centre/tennis-court-indoor")
     query_tennis_court("rosemary_garden_tennis", "https://bookings.better.org.uk/location/islington-tennis-centre/rosemary-gardens-tennis")
     return {"statusCode": 200, "body": "Scraping completed successfully"}
