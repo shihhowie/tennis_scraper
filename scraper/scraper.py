@@ -7,6 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from datetime import datetime,timedelta
 import sys
 import time
+import os 
 
 from sql_util import write_to_db
 
