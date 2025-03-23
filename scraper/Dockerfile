@@ -3,6 +3,7 @@ FROM amazon/aws-lambda-python:3.9
 RUN yum install -y \
     unzip \
     libxcb \
+    libxcb-devel \
     alsa-lib \
     atk \
     cups-libs \
@@ -25,7 +26,7 @@ RUN yum install -y \
     libatomic \
     libnss3 \
     libgconf-2
-    
+
 COPY ./chrome-installer.sh ./chrome-installer.sh
 RUN chmod +x ./chrome-installer.sh
 RUN ./chrome-installer.sh
