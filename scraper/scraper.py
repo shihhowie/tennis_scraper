@@ -78,8 +78,8 @@ def query_tennis_court(court_name, base_url):
         except Exception as e:
             print(f'An error occurred: {e}')
         # time.sleep(1)
-
-    driver.quit()
+    finally:
+        driver.quit()
 
 def lambda_handler(event, context):
     print("Environment variables:")
