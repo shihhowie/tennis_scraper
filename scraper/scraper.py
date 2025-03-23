@@ -88,7 +88,7 @@ def query_tennis_court(court_name, base_url):
             time.sleep(1)
     finally:
         driver.quit()
-    run_Time = time.time()-write_time
+    run_time = time.time()-write_time
     print(f"run time: {run_time: .2f} seconds")
 
 def lambda_handler(event, context):
