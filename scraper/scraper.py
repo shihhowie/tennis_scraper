@@ -30,54 +30,55 @@ def query_tennis_court(court_name, base_url):
 
     today = datetime.now().date()
     write_time = int(time.time())
-    for i in range(7):
-        date = today+timedelta(days=i)
-        datestring = date.strftime('%Y-%m-%d')
-        print(datestring)
-        datestring_db = date.strftime('%Y%m%d')
-        try:
-            # Navigate to the booking page
-            url = f'{base_url}/{datestring}/by-time'
-            print(url)
-            driver.get(url)
+    try:
+        for i in range(7):
+            date = today+timedelta(days=i)
+            datestring = date.strftime('%Y-%m-%d')
+            print(datestring)
+            datestring_db = date.strftime('%Y%m%d')
+            try:
+                # Navigate to the booking page
+                url = f'{base_url}/{datestring}/by-time'
+                print(url)
+                driver.get(url)
 
-            # Wait for the booking slots to load
-            wait = WebDriverWait(driver, 10)
-            parent_divs = wait.until(EC.presence_of_all_elements_located(
-                (By.CSS_SELECTOR, '.ClassCardComponent__Row-sc-1v7d176-1.vexzn')
-            ))
+                # Wait for the booking slots to load
+                wait = WebDriverWait(driver, 10)
+                parent_divs = wait.until(EC.presence_of_all_elements_located(
+                    (By.CSS_SELECTOR, '.ClassCardComponent__Row-sc-1v7d176-1.vexzn')
+                ))
 
-            # Loop through each parent div and parse child elements
-            for parent in parent_divs:
-                # Get class time (child element)
-                class_time = parent.find_element(By.CSS_SELECTOR, '.ClassCardComponent__ClassTime-sc-1v7d176-3.ePikrL').text
-                space = 0
-                # Get booking information (child element)
-                try:
-                    booking_info = parent.find_element(By.CSS_SELECTOR, '.ContextualComponent__BookWrap-sc-eu3gk6-1.dONMwG').text
-                    space = int(booking_info.split(" ")[0])
-                except Exception:
-                    booking_info = "Booking information not available"
-            
+                # Loop through each parent div and parse child elements
+                for parent in parent_divs:
+                    # Get class time (child element)
+                    class_time = parent.find_element(By.CSS_SELECTOR, '.ClassCardComponent__ClassTime-sc-1v7d176-3.ePikrL').text
+                    space = 0
+                    # Get booking information (child element)
+                    try:
+                        booking_info = parent.find_element(By.CSS_SELECTOR, '.ContextualComponent__BookWrap-sc-eu3gk6-1.dONMwG').text
+                        space = int(booking_info.split(" ")[0])
+                    except Exception:
+                        booking_info = "Booking information not available"
+                
 
-                if space > 0:
-                # Print the parsed information
-                    print(f"Class Time: {class_time}")
-                    start_time, end_time = class_time.split("-")
-                    start_time = datetime.strptime(start_time.strip(), "%H:%M").hour
-                    end_time = datetime.strptime(end_time.strip(), "%H:%M").hour
-                    print(f"Booking Info: {booking_info}")
-                    num_slots = booking_info[0]
-                    print("-" * 40)
-                    #print(datestring_db, start_time, end_time, num_slots)
-                    sql = f"""
-                        INSERT INTO tennis_court_schedule (name, req_time, req_date, start_time, end_time, num_slots)
-                        VALUES('{court_name}', {write_time}, {datestring_db}, {start_time}, {end_time}, {num_slots});
-                    """
-                    write_to_db(sql)
-        except Exception as e:
-            print(f'An error occurred: {e}')
-        # time.sleep(1)
+                    if space > 0:
+                    # Print the parsed information
+                        print(f"Class Time: {class_time}")
+                        start_time, end_time = class_time.split("-")
+                        start_time = datetime.strptime(start_time.strip(), "%H:%M").hour
+                        end_time = datetime.strptime(end_time.strip(), "%H:%M").hour
+                        print(f"Booking Info: {booking_info}")
+                        num_slots = booking_info[0]
+                        print("-" * 40)
+                        #print(datestring_db, start_time, end_time, num_slots)
+                        sql = f"""
+                            INSERT INTO tennis_court_schedule (name, req_time, req_date, start_time, end_time, num_slots)
+                            VALUES('{court_name}', {write_time}, {datestring_db}, {start_time}, {end_time}, {num_slots});
+                        """
+                        write_to_db(sql)
+            except Exception as e:
+                print(f'An error occurred: {e}')
+            # time.sleep(1)
     finally:
         driver.quit()
 
