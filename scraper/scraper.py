@@ -85,7 +85,7 @@ def query_tennis_court(court_name, base_url):
                         write_to_db(sql)
             except Exception as e:
                 print(f'An error occurred: {e}')
-            # time.sleep(1)
+            time.sleep(1)
     finally:
         driver.quit()
 
