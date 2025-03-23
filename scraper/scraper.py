@@ -24,6 +24,8 @@ chrome_options.add_argument("--disable-crash-reporter")  # Disable crash reporte
 chrome_options.add_argument("--disable-infobars")  # Disable infobars
 chrome_options.add_argument("--single-process")  # Run Chrome in a single processchrome_options.binary_location='/var/task/chrome-linux64/chrome'
 CHROMEDRIVER_PATH = "/var/task/chromedriver"  # Update this path if needed
+chrome_options.add_argument("--no-zygote")  # Disable zygote process
+chrome_options.binary_location = "/var/task/chrome-linux64/chrome"
 
 # driver_path=chromedriver_autoinstaller.install()  # Automatically downloads and installs the matching Chromedriver
 # Initialize the WebDriver
