@@ -122,5 +122,7 @@ def lambda_handler(event, context):
     return {"statusCode": 200, "body": "Scraping completed successfully"}
 
 if __name__ == '__main__':
-    query_tennis_court("islington_tennis_centre", "https://bookings.better.org.uk/location/islington-tennis-centre/tennis-court-indoor")
-    query_tennis_court("rosemary_garden_tennis", "https://bookings.better.org.uk/location/islington-tennis-centre/rosemary-gardens-tennis")
+    # query_tennis_court("islington_tennis_centre", "https://bookings.better.org.uk/location/islington-tennis-centre/tennis-court-indoor")
+    query_tennis_court("rosemary_garden_tennis",
+                        "https://bookings.better.org.uk/location/islington-tennis-centre/rosemary-gardens-tennis",
+                        test_mode=True)
