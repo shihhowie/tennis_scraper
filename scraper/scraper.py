@@ -18,7 +18,6 @@ def configure_proxy():
     proxy.proxy_type = ProxyType.MANUAL
     proxy.http_proxy = "104.248.163.184:3128"  # Replace with a free proxy
     proxy.ssl_proxy = "104.248.163.184:3128"   # Same for SSL
-    proxy.add_to_capabilities(webdriver.DesiredCapabilities.CHROME)
     return proxy
 
 def configure_driver():
@@ -40,7 +39,8 @@ def configure_driver():
     service = Service(executable_path="/var/task/chromedriver-linux64/chromedriver",
                       servicelog_path="/tmp/chromedriver.log") 
     proxy = configure_proxy()
-    driver = webdriver.Chrome(service=service, options=chrome_options, desired_capabilities=proxy.to_capabilities())
+    # capabillities = webdriver.DesiredCapabilities.CHROME.copy()
+    driver = webdriver.Chrome(service=service, options=chrome_options, proxy=proxy)
 
 # driver_path=chromedriver_autoinstaller.install()  # Automatically downloads and installs the matching Chromedriver
 # Initialize the WebDriver
