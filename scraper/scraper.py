@@ -16,15 +16,15 @@ chrome_options.add_argument("--headless")  # Run in headless mode
 chrome_options.add_argument("--no-sandbox")  # Required for EC2
 chrome_options.add_argument("--disable-dev-shm-usage")  # Required for EC2
 chrome_options.add_argument("--disable-gpu")  # Disable GPU for headless mode
-chrome_options.add_argument("--disable-software-rasterizer")  # Disable software rasterizer
-chrome_options.add_argument("--disable-extensions")  # Disable extensions
-chrome_options.add_argument("--disable-background-networking")  # Reduce network usage
-chrome_options.add_argument("--disable-renderer-backgrounding")  # Prevent renderer throttling
-chrome_options.add_argument("--disable-crash-reporter")  # Disable crash reporter
-chrome_options.add_argument("--disable-infobars")  # Disable infobars
+# chrome_options.add_argument("--disable-software-rasterizer")  # Disable software rasterizer
+# chrome_options.add_argument("--disable-extensions")  # Disable extensions
+# chrome_options.add_argument("--disable-background-networking")  # Reduce network usage
+# chrome_options.add_argument("--disable-renderer-backgrounding")  # Prevent renderer throttling
+# chrome_options.add_argument("--disable-crash-reporter")  # Disable crash reporter
+# chrome_options.add_argument("--disable-infobars")  # Disable infobars
 chrome_options.add_argument("--single-process")  # Run Chrome in a single processchrome_options.binary_location='/var/task/chrome-linux64/chrome'
 CHROMEDRIVER_PATH = "/var/task/chromedriver"  # Update this path if needed
-chrome_options.add_argument("--no-zygote")  # Disable zygote process
+# chrome_options.add_argument("--no-zygote")  # Disable zygote process
 chrome_options.binary_location = "/var/task/chrome-linux64/chrome"
 
 # driver_path=chromedriver_autoinstaller.install()  # Automatically downloads and installs the matching Chromedriver
