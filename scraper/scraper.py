@@ -29,7 +29,7 @@ chrome_options.binary_location = "/var/task/chrome-linux64/chrome"
 
 # driver_path=chromedriver_autoinstaller.install()  # Automatically downloads and installs the matching Chromedriver
 # Initialize the WebDriver
-def query_tennis_court(court_name, base_url):
+def query_tennis_court(court_name, base_url, test_mode=False):
     # driver_path = chrome_aws_lambda.chromedriver_path if chrome_aws_lambda else None
     service = Service(executable_path="/var/task/chromedriver-linux64/chromedriver",
                       servicelog_path="/tmp/chromedriver.log") 
@@ -38,7 +38,8 @@ def query_tennis_court(court_name, base_url):
     today = datetime.now().date()
     write_time = int(time.time())
     try:
-        for i in range(7):
+        fetch_days = 7 if not test_mode else 1
+        for i in range(fetch_days):
             date = today+timedelta(days=i)
             datestring = date.strftime('%Y-%m-%d')
             print(datestring)
