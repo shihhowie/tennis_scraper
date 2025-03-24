@@ -99,9 +99,9 @@ def test_connection():
 
         url = "https://www.google.com/"
         driver.get(url)
-
-        # Wait for the booking slots to load
-        wait = WebDriverWait(driver, 10)
+        print("internet connection established")
+        # # Wait for the booking slots to load
+        # wait = WebDriverWait(driver, 10)
     except Exception as e:
         print(f'An error occurred: {e}')
 
