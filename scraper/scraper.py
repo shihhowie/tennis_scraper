@@ -102,7 +102,7 @@ def test_connection():
         driver.get(url)
         print("internet connection to google established")
 
-        url = "https://bookings.better.org.uk""
+        url = "https://bookings.better.org.uk"
         driver.get(url)
         print("internet connection to better established")
         # # Wait for the booking slots to load
