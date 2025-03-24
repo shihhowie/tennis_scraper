@@ -45,7 +45,7 @@ def configure_driver():
         'httpProxy': proxy.http_proxy,
         'sslProxy': proxy.ssl_proxy
     }
-    driver = webdriver.Chrome(service=service, options=chrome_options, desired_pacabilities=capabilities)
+    driver = webdriver.Chrome(service=service, options=chrome_options, desired_capabilities=capabilities)
     return driver 
 
 # driver_path=chromedriver_autoinstaller.install()  # Automatically downloads and installs the matching Chromedriver
