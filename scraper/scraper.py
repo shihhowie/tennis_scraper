@@ -13,7 +13,7 @@ from sql_util import write_to_db
 
 chrome_options = Options()
 chrome_options.add_argument("--headless")  # Run in headless mode
-chrome_options.add_argument("--no-sandbox")  # Required for EC2
+# chrome_options.add_argument("--no-sandbox")  # Required for EC2
 chrome_options.add_argument("--disable-dev-shm-usage")  # Required for EC2
 chrome_options.add_argument("--disable-gpu")  # Disable GPU for headless mode
 # chrome_options.add_argument("--disable-software-rasterizer")  # Disable software rasterizer
@@ -93,11 +93,10 @@ def query_tennis_court(court_name, base_url, test_mode=False):
     print(f"run time: {run_time: .2f} seconds")
 
 def test_connection():
-    try:
-        service = Service(executable_path="/var/task/chromedriver-linux64/chromedriver",
+    service = Service(executable_path="/var/task/chromedriver-linux64/chromedriver",
                         servicelog_path="/tmp/chromedriver.log") 
-        driver = webdriver.Chrome(service=service, options=chrome_options)\
-
+    driver = webdriver.Chrome(service=service, options=chrome_options)
+    try:
         url = "https://www.google.com/"
         driver.get(url)
         print("internet connection to google established")
