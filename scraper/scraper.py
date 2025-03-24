@@ -91,6 +91,21 @@ def query_tennis_court(court_name, base_url):
     run_time = time.time()-write_time
     print(f"run time: {run_time: .2f} seconds")
 
+def test_connection():
+    try:
+        service = Service(executable_path="/var/task/chromedriver-linux64/chromedriver",
+                        servicelog_path="/tmp/chromedriver.log") 
+        driver = webdriver.Chrome(service=service, options=chrome_options)\
+
+        url = "https://www.google.com/"
+        driver.get(url)
+
+        # Wait for the booking slots to load
+        wait = WebDriverWait(driver, 10)
+    except Exception as e:
+        print(f'An error occurred: {e}')
+
+
 def lambda_handler(event, context):
     print("Environment variables:")
     print(os.environ)
@@ -98,8 +113,9 @@ def lambda_handler(event, context):
     print(f"Chromedriver exists: {os.path.exists('/var/task/chromedriver-linux64/chromedriver')}")
     print(f"Chromium exists: {os.path.exists('/var/task/chrome-linux64/chrome')}")
     
-    query_tennis_court("islington_tennis_centre", "https://bookings.better.org.uk/location/islington-tennis-centre/tennis-court-indoor")
-    query_tennis_court("rosemary_garden_tennis", "https://bookings.better.org.uk/location/islington-tennis-centre/rosemary-gardens-tennis")
+    # query_tennis_court("islington_tennis_centre", "https://bookings.better.org.uk/location/islington-tennis-centre/tennis-court-indoor")
+    # query_tennis_court("rosemary_garden_tennis", "https://bookings.better.org.uk/location/islington-tennis-centre/rosemary-gardens-tennis")
+    test_connection()
     return {"statusCode": 200, "body": "Scraping completed successfully"}
 
 if __name__ == '__main__':
