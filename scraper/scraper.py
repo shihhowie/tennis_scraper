@@ -46,7 +46,8 @@ def configure_driver():
         'sslProxy': proxy.ssl_proxy
     }
     driver = webdriver.Chrome(service=service, options=chrome_options, desired_pacabilities=capabilities)
-
+    return driver 
+    
 # driver_path=chromedriver_autoinstaller.install()  # Automatically downloads and installs the matching Chromedriver
 # Initialize the WebDriver
 def query_tennis_court(court_name, base_url, test_mode=False):
