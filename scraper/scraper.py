@@ -13,14 +13,12 @@ from selenium.webdriver.common.proxy import Proxy, ProxyType
 from sql_util import write_to_db
 
 
-def configure_proxy(chrome_options):
+def configure_proxy():
     proxy = Proxy()
     proxy.proxy_type = ProxyType.MANUAL
     proxy.http_proxy = "104.248.163.184:3128"  # Replace with a free proxy
     proxy.ssl_proxy = "104.248.163.184:3128"   # Same for SSL
     proxy.add_to_capabilities(webdriver.DesiredCapabilities.CHROME)
-
-    chrome_options.add_argument("--headless")
     return proxy
 
 def configure_driver():
@@ -41,6 +39,7 @@ def configure_driver():
     chrome_options.binary_location = "/var/task/chrome-linux64/chrome"
     service = Service(executable_path="/var/task/chromedriver-linux64/chromedriver",
                       servicelog_path="/tmp/chromedriver.log") 
+    proxy = configure_proxy()
     driver = webdriver.Chrome(service=service, options=chrome_options, desired_capabilities=proxy.to_capabilities())
 
 # driver_path=chromedriver_autoinstaller.install()  # Automatically downloads and installs the matching Chromedriver
