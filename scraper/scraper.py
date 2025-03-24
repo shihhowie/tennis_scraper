@@ -39,8 +39,13 @@ def configure_driver():
     service = Service(executable_path="/var/task/chromedriver-linux64/chromedriver",
                       servicelog_path="/tmp/chromedriver.log") 
     proxy = configure_proxy()
-    # capabillities = webdriver.DesiredCapabilities.CHROME.copy()
-    driver = webdriver.Chrome(service=service, options=chrome_options, proxy=proxy)
+    capabillities = webdriver.DesiredCapabilities.CHROME.copy()
+    capabilities['proxy'] = {
+        'proxyType': 'manual',
+        'httpProxy': proxy.http_proxy,
+        'sslProxy': proxy.ssl_proxy
+    }
+    driver = webdriver.Chrome(service=service, options=chrome_options, desired_pacabilities=capabilities)
 
 # driver_path=chromedriver_autoinstaller.install()  # Automatically downloads and installs the matching Chromedriver
 # Initialize the WebDriver
