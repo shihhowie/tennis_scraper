@@ -39,7 +39,7 @@ def configure_driver():
     service = Service(executable_path="/var/task/chromedriver-linux64/chromedriver",
                       servicelog_path="/tmp/chromedriver.log") 
     proxy = configure_proxy()
-    capabillities = webdriver.DesiredCapabilities.CHROME.copy()
+    capabilities = webdriver.DesiredCapabilities.CHROME.copy()
     capabilities['proxy'] = {
         'proxyType': 'manual',
         'httpProxy': proxy.http_proxy,
@@ -47,7 +47,7 @@ def configure_driver():
     }
     driver = webdriver.Chrome(service=service, options=chrome_options, desired_pacabilities=capabilities)
     return driver 
-    
+
 # driver_path=chromedriver_autoinstaller.install()  # Automatically downloads and installs the matching Chromedriver
 # Initialize the WebDriver
 def query_tennis_court(court_name, base_url, test_mode=False):
