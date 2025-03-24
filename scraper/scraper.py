@@ -13,7 +13,7 @@ from sql_util import write_to_db
 
 chrome_options = Options()
 chrome_options.add_argument("--headless")  # Run in headless mode
-chrome_options.add_argument("--no-sandbox")  # Required for EC2
+# chrome_options.add_argument("--no-sandbox")  # Required for EC2
 chrome_options.add_argument("--disable-dev-shm-usage")  # Required for EC2
 chrome_options.add_argument("--disable-gpu")  # Disable GPU for headless mode
 # chrome_options.add_argument("--disable-software-rasterizer")  # Disable software rasterizer
