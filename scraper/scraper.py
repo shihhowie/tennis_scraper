@@ -114,8 +114,8 @@ def lambda_handler(event, context):
     print(f"Chromium exists: {os.path.exists('/var/task/chrome-linux64/chrome')}")
     
     # query_tennis_court("islington_tennis_centre", "https://bookings.better.org.uk/location/islington-tennis-centre/tennis-court-indoor")
-    # query_tennis_court("rosemary_garden_tennis", "https://bookings.better.org.uk/location/islington-tennis-centre/rosemary-gardens-tennis")
-    test_connection()
+    query_tennis_court("rosemary_garden_tennis", "https://bookings.better.org.uk/location/islington-tennis-centre/rosemary-gardens-tennis")
+    # test_connection()
     return {"statusCode": 200, "body": "Scraping completed successfully"}
 
 if __name__ == '__main__':
