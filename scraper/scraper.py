@@ -8,32 +8,46 @@ from datetime import datetime,timedelta
 import sys
 import time
 import os 
+from selenium.webdriver.common.proxy import Proxy, ProxyType
 
 from sql_util import write_to_db
 
-chrome_options = Options()
-chrome_options.add_argument("--headless")  # Run in headless mode
-chrome_options.add_argument("--no-sandbox")  # Required for EC2
-chrome_options.add_argument("--disable-dev-shm-usage")  # Required for EC2
-chrome_options.add_argument("--disable-gpu")  # Disable GPU for headless mode
-# chrome_options.add_argument("--disable-software-rasterizer")  # Disable software rasterizer
-# chrome_options.add_argument("--disable-extensions")  # Disable extensions
-# chrome_options.add_argument("--disable-background-networking")  # Reduce network usage
-# chrome_options.add_argument("--disable-renderer-backgrounding")  # Prevent renderer throttling
-# chrome_options.add_argument("--disable-crash-reporter")  # Disable crash reporter
-# chrome_options.add_argument("--disable-infobars")  # Disable infobars
-chrome_options.add_argument("--single-process")  # Run Chrome in a single processchrome_options.binary_location='/var/task/chrome-linux64/chrome'
-CHROMEDRIVER_PATH = "/var/task/chromedriver"  # Update this path if needed
-# chrome_options.add_argument("--no-zygote")  # Disable zygote process
-chrome_options.binary_location = "/var/task/chrome-linux64/chrome"
+
+def configure_proxy(chrome_options):
+    proxy = Proxy()
+    proxy.proxy_type = ProxyType.MANUAL
+    proxy.http_proxy = "104.248.163.184:3128"  # Replace with a free proxy
+    proxy.ssl_proxy = "104.248.163.184:3128"   # Same for SSL
+    proxy.add_to_capabilities(webdriver.DesiredCapabilities.CHROME)
+
+    chrome_options.add_argument("--headless")
+    return proxy
+
+def configure_driver():
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")  # Run in headless mode
+    chrome_options.add_argument("--no-sandbox")  # Required for EC2
+    chrome_options.add_argument("--disable-dev-shm-usage")  # Required for EC2
+    chrome_options.add_argument("--disable-gpu")  # Disable GPU for headless mode
+    chrome_options.add_argument("--disable-software-rasterizer")  # Disable software rasterizer
+    chrome_options.add_argument("--disable-extensions")  # Disable extensions
+    chrome_options.add_argument("--disable-background-networking")  # Reduce network usage
+    chrome_options.add_argument("--disable-renderer-backgrounding")  # Prevent renderer throttling
+    chrome_options.add_argument("--disable-crash-reporter")  # Disable crash reporter
+    chrome_options.add_argument("--disable-infobars")  # Disable infobars
+    chrome_options.add_argument("--single-process")  # Run Chrome in a single processchrome_options.binary_location='/var/task/chrome-linux64/chrome'
+    CHROMEDRIVER_PATH = "/var/task/chromedriver"  # Update this path if needed
+    # chrome_options.add_argument("--no-zygote")  # Disable zygote process
+    chrome_options.binary_location = "/var/task/chrome-linux64/chrome"
+    service = Service(executable_path="/var/task/chromedriver-linux64/chromedriver",
+                      servicelog_path="/tmp/chromedriver.log") 
+    driver = webdriver.Chrome(service=service, options=chrome_options, desired_capabilities=proxy.to_capabilities())
 
 # driver_path=chromedriver_autoinstaller.install()  # Automatically downloads and installs the matching Chromedriver
 # Initialize the WebDriver
 def query_tennis_court(court_name, base_url, test_mode=False):
     # driver_path = chrome_aws_lambda.chromedriver_path if chrome_aws_lambda else None
-    service = Service(executable_path="/var/task/chromedriver-linux64/chromedriver",
-                      servicelog_path="/tmp/chromedriver.log") 
-    driver = webdriver.Chrome(service=service, options=chrome_options)
+    driver = configure_driver()
 
     today = datetime.now().date()
     write_time = int(time.time())
@@ -93,9 +107,7 @@ def query_tennis_court(court_name, base_url, test_mode=False):
     print(f"run time: {run_time: .2f} seconds")
 
 def test_connection():
-    service = Service(executable_path="/var/task/chromedriver-linux64/chromedriver",
-                        servicelog_path="/tmp/chromedriver.log") 
-    driver = webdriver.Chrome(service=service, options=chrome_options)
+    driver = configure_driver()
     try:
         url = "https://www.google.com/"
         driver.get(url)
